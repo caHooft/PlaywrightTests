@@ -20,18 +20,16 @@ public class NUnitPlaywright : PageTest
 
     [Test]
     public async Task LoginUsingValidCredentials()
-    {        
+    {
         await Page.ClickAsync(selector: "text=Login");
-
-/*        await Page.ScreenshotAsync(new PageScreenshotOptions
-        {
-            Path = "loginScreen.jpg"
-        });
-*/
         await Page.FillAsync(selector: "#UserName", value: "admin");
         await Page.FillAsync(selector: "#Password", value: "password");
         await Page.ClickAsync(selector: "text=Log in");
-        await Expect(Page.Locator(selector: "text='Employee Details'")).ToBeVisibleAsync();
+
+        await Expect(Page.Locator(selector: "text='Employee Details'")).ToBeVisibleAsync(new LocatorAssertionsToBeVisibleOptions
+        {
+            Timeout = 1
+        });
 
 /*        await Page.ScreenshotAsync(new PageScreenshotOptions
         {
