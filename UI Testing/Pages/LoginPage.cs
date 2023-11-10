@@ -7,35 +7,37 @@ using NUnit.Framework;
 
 namespace UITests;
 
-[Parallelizable(ParallelScope.Self)]
-
-[TestFixture]
-public class NUnitPlaywright : PageTest
+public class LoginPage
 {
-    [SetUp]
-    public async Task Setup()
+    //Arrange
+    private IPage _page;
+    private readonly ILocator _LinkLogin;
+    private readonly ILocator _UserName;
+    private readonly ILocator _Password;
+    private readonly ILocator _buttonLogin;
+    private readonly ILocator _LinkEmployeeDetails;
+
+    public LoginPage(IPage page)
     {
-        await Page.GotoAsync(url: "http://www.eaapp.somee.com");
+        _page                   = page;
+        _LinkLogin              = _page.Locator(selector: "text=Login");
+        _UserName               = _page.Locator(selector: "#UserName");
+        _Password               = _page.Locator(selector: "#Password");
+        _buttonLogin            = _page.Locator(selector: "text=Log in");
+        _LinkEmployeeDetails    = _page.Locator(selector: "text=Employee Details");
+
+    }
+    //Act
+    public async Task ClickLogin() => await _LinkLogin.ClickAsync();
+
+    public async Task Login(string username, string password)
+    {
+        await _UserName.FillAsync(username);
+        await _Password.FillAsync(password);
+        await _buttonLogin.ClickAsync();
     }
 
-    [Test]
-    public async Task LoginUsingValidCredentials()
-    {
-        await Page.ClickAsync(selector: "text=Login");
-        await Page.FillAsync(selector: "#UserName", value: "admin");
-        await Page.FillAsync(selector: "#Password", value: "password");
-        await Page.ClickAsync(selector: "text=Log in");
-
-        await Expect(Page.Locator(selector: "text='Employee Details'")).ToBeVisibleAsync(new LocatorAssertionsToBeVisibleOptions
-        {
-            Timeout = 1
-        });
-
-/*        await Page.ScreenshotAsync(new PageScreenshotOptions
-        {
-            Path = "Hello Admin.jpg"
-        });
-*/
-    }
+    //Assert
+    public async Task<bool> IsEmployeeDetailsExists() => await _LinkEmployeeDetails.IsVisibleAsync();
 
 }
