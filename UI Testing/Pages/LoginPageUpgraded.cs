@@ -18,9 +18,20 @@ public class LoginPageUp
     private ILocator _password => _page.Locator(selector: "#Password");
     private ILocator _buttonLogin => _page.Locator(selector: "text=Log in");
     private ILocator _LinkEmployeeDetails => _page.Locator(selector: "text=Employee Details");
+    private ILocator _LinkEmployeeLists => _page.Locator(selector: "text=Employee List");
 
     //Act
-    public async Task ClickLogin() => await _loginLink.ClickAsync();
+    public async Task ClickLogin()
+    {
+        //Deprecated call but closest to the tutorial
+        await _page.RunAndWaitForNavigationAsync(async () =>
+        {
+            await _loginLink.ClickAsync();
+        }, new PageRunAndWaitForNavigationOptions
+        {
+            UrlString = "**/Login"
+        });
+    }
 
     public async Task Login(string username, string password)
     {
@@ -28,6 +39,7 @@ public class LoginPageUp
         await _password.FillAsync(password);
         await _buttonLogin.ClickAsync();
     }
+    public async Task clickEmplyeeList() => await _LinkEmployeeLists.ClickAsync();
 
     //Assert
     public async Task<bool> IsEmployeeDetailsExists() => await _LinkEmployeeDetails.IsVisibleAsync();
