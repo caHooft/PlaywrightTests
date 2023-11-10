@@ -36,7 +36,7 @@ public class NUnitPlaywright
     }
 
     [Test]
-    public async Task TestNetwork()
+    public async Task TestNetworkExpecting200()
     {
         using var playwright = await Playwright.CreateAsync();
 
@@ -55,22 +55,16 @@ public class NUnitPlaywright
         await loginPage.clickEmplyeeList();
 
         //var example for checking API request
-        //Cannot get this to run, left the code commented out over here
-        //var waitResponce :Task < IRequest > = page.WaitForRequestAsync(urlOrPredicate "**/Employee");
-        //wait loginPage.clickEmplyeeList();
-        //var getResponce :IRequest = await waitResponce;
-
-        //alternative after many tries (cannot say for sure if it is exactly the same)
         var responce = await page.RunAndWaitForResponseAsync(async () =>
         {
             await loginPage.clickEmplyeeList();
-        }, x => x.Url.Contains("/Employee"));
+        }, x => x.Url.Contains("/Employee") && x.Status == 200);
 
         
         var isExist = await loginPage.IsEmployeeDetailsExists();
 
         Assert.IsTrue(isExist);
 
-    }
+    }   
 
 }
