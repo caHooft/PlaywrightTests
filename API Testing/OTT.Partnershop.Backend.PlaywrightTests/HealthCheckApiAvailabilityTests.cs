@@ -1,4 +1,7 @@
-﻿using Microsoft.Playwright;
+﻿using FluentAssertions;
+using Microsoft.Playwright;
+using Xunit;
+using TheoryAttribute = Xunit.TheoryAttribute;
 
 namespace OTT.Partnershop.Backend.PlaywrightTests.AvailabilityTests;
 
