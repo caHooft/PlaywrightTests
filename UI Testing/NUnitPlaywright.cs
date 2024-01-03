@@ -19,7 +19,7 @@ public class NUnitPlaywright
 
         await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
         {
-            Headless = false
+            Headless = true
 
         });
 
@@ -42,7 +42,7 @@ public class NUnitPlaywright
 
         await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
         {
-            Headless = false
+            Headless = true
 
         });
         //Page
