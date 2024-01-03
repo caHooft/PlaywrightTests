@@ -43,7 +43,7 @@ public class HealthCheckApiAvailabilityTests
         var response = await requestContext.GetAsync(url: "/walled-garden/v2/health");
         var data = await response.TextAsync();
         
-        //would be better to check if the respond status is 200 ok probebly
+        //date is always in the correct respond format of walled garden
         data.Should().Contain("date");
     }
 }
