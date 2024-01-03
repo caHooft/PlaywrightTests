@@ -31,7 +31,7 @@ public class NUnitPlaywright
         await loginPage.Login(username:"admin", password:"password");
         var isExist = await loginPage.IsEmployeeDetailsExists();
 
-        Assert.IsTrue(isExist);
+        Assert.That(isExist);
 
     }
 
@@ -63,8 +63,8 @@ public class NUnitPlaywright
         
         var isExist = await loginPage.IsEmployeeDetailsExists();
 
-        Assert.IsTrue(isExist);
-
+        //Assert.IsTrue(isExist); Example from tutorial that i replaced
+        Assert.That(isExist);
     }   
 
 }
