@@ -2,15 +2,20 @@
 
 namespace OTT.Partnershop.Backend.PlaywrightTests.AvailabilityTests;
 
-[TestFixture]
+[TestFixture("https://partnershop-backend.dev.ott.kpn.org")]
+[TestFixture("https://partnershop-backend.acc.ott.kpn.org")]
+[TestFixture("https://partnershop-backend.ott.kpn.org")]
+[Parallelizable(ParallelScope.All)]
 public class HealthCheckApiPartnershop
 {
+    private String baseUrl;
+
+    public HealthCheckApiPartnershop(string baseUrl)
+    {
+        this.baseUrl = baseUrl;
+    }
     [Test]
-    [TestCase("https://partnershop-backend.dev.ott.kpn.org")]
-    [TestCase("https://partnershop-backend.acc.ott.kpn.org")]
-    [TestCase("https://partnershop-backend.ott.kpn.org")]
-    [Parallelizable(ParallelScope.All)]
-    public async Task AvailabilityCheckPartnershop(string baseUrl)
+    public async Task AvailabilityCheckPartnershop()
     {
         using IPlaywright playwright = await Playwright.CreateAsync();
 
