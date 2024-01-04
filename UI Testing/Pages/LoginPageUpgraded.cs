@@ -21,9 +21,10 @@ public class LoginPageUp
     private ILocator _LinkEmployeeLists => _page.Locator(selector: "text=Employee List");
 
     //Act
+    [Obsolete]
     public async Task ClickLogin()
     {
-        //Deprecated call but closest to the tutorial
+        //Deprecated call (RunAndWaitForNavigationAsync) but closest to the tutorial and its functional
         await _page.RunAndWaitForNavigationAsync(async () =>
         {
             await _loginLink.ClickAsync();
