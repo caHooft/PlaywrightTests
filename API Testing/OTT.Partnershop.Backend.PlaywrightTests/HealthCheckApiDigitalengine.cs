@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-using Microsoft.Playwright;
-using NUnit.Framework;
-
-namespace OTT.Partnershop.Backend.PlaywrightTests.AvailabilityTests;
+﻿namespace OTT.Partnershop.Backend.PlaywrightTests.AvailabilityTests;
 
 [TestFixture]
 public class HealthCheckApiDigitalengine

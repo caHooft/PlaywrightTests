@@ -1,11 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
-using Microsoft.VisualBasic;
-using NUnit.Framework;
-
-namespace UITests;
+﻿namespace UITests;
 
 [Parallelizable(ParallelScope.Self)]
 
@@ -13,6 +6,7 @@ namespace UITests;
 public class NUnitPlaywright
 {
     [Test]
+    [Obsolete]
     public async Task LoginUsingValidCredentials()
     {
         using var playwright = await Playwright.CreateAsync();
@@ -36,6 +30,7 @@ public class NUnitPlaywright
     }
 
     [Test]
+    [Obsolete]
     public async Task TestNetworkExpecting200()
     {
         using var playwright = await Playwright.CreateAsync();
